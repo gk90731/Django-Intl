@@ -21,7 +21,7 @@ def langConvert(request):
         output = _("Welcome to my site.")
 
         # changing the language code in settings.py file dynamically
-        translation.activate(UserProfile.objects.all()[0].language)
+        translation.activate(UserProfile.objects.filter(user=request.user)[0].language)
         request.LANGUAGE_CODE = translation.get_language()
         return Response({"output":output})
     
@@ -39,7 +39,7 @@ def langConvert(request):
                 output = _("Welcome to my site.")
 
                 # changing the language code in settings.py file dynamically
-                translation.activate(UserProfile.objects.all()[0].language)
+                translation.activate(UserProfile.objects.filter(user=request.user)[0].language)
                 request.LANGUAGE_CODE = translation.get_language()
                 return Response({"output":output})
             else:
